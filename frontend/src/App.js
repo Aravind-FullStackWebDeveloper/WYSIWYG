@@ -1,23 +1,24 @@
-// frontend/src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
-import Editor from './pages/Editor';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
+import Home from './components/Home';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Editor from './components/editor/Editor';
 
 const App = () => {
   return (
-    <Router>
-      <div className="app">
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/editor" component={Editor} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-        </Switch>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/editor" element={<Editor />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 };
 

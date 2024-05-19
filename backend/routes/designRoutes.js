@@ -1,13 +1,17 @@
 // backend/routes/designRoutes.js
 const express = require('express');
-const { createDesign, getDesigns, getDesignById, updateDesign, deleteDesign } = require('../controllers/designController');
-const { authenticateToken } = require('../middleware/authMiddleware');
 const router = express.Router();
+const { createDesign, getDesigns } = require('../controllers/designController');
+const auth = require('../middleware/authMiddleware');
 
-router.post('/', authenticateToken, createDesign);
-router.get('/', authenticateToken, getDesigns);
-router.get('/:id', authenticateToken, getDesignById);
-router.put('/:id', authenticateToken, updateDesign);
-router.delete('/:id', authenticateToken, deleteDesign);
+// @route   POST api/designs
+// @desc    Create a design
+// @access  Private
+router.post('/', auth, createDesign);
+
+// @route   GET api/designs
+// @desc    Get all designs
+// @access  Private
+router.get('/', auth, getDesigns);
 
 module.exports = router;

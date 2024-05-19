@@ -1,10 +1,15 @@
 // backend/models/Design.js
 const mongoose = require('mongoose');
 
-const designSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  content: { type: Object, required: true },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+const DesignSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  content: {
+    type: String,
+    required: true
+  }
 });
 
-module.exports = mongoose.model('Design', designSchema);
+module.exports = mongoose.model('Design', DesignSchema);
